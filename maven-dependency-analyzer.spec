@@ -4,7 +4,7 @@
 
 Name:           %{?scl_prefix}%{pkg_name}
 Version:        1.3
-Release:        9.11%{?dist}
+Release:        9.12%{?dist}
 Summary:        Maven dependency analyzer
 License:        ASL 2.0
 URL:            http://maven.apache.org/shared/maven-dependency-analyzer/
@@ -12,10 +12,10 @@ Source0:        http://repo1.maven.org/maven2/org/apache/maven/shared/%{pkg_name
 BuildArch:      noarch
 
 BuildRequires:  %{?scl_prefix_java_common}maven-local
-BuildRequires:  maven30-maven-shared
-BuildRequires:  maven30-httpcomponents-project
-BuildRequires:  maven30-maven-doxia-module-xhtml
-BuildRequires:  maven30-maven-plugin-testing-tools
+BuildRequires:  %{?scl_prefix}maven-shared
+BuildRequires:  %{?scl_prefix}httpcomponents-project
+BuildRequires:  %{?scl_prefix}maven-doxia-module-xhtml
+BuildRequires:  %{?scl_prefix}maven-plugin-testing-tools
 
 # This is a replacement package for maven-shared-dependency-analyzer
 
@@ -35,7 +35,7 @@ Summary:        API documentation for %{pkg_name}
 
 %prep
 %setup -q -n %{pkg_name}-%{version}
-%{?scl:scl enable maven30 %{scl} - <<"EOF"}
+%{?scl:scl enable %{scl} - <<"EOF"}
 set -e -x
 
 # Needed for tests only. However, the right groupId:artifactId of jmock in
@@ -44,14 +44,14 @@ set -e -x
 %{?scl:EOF}
 
 %build
-%{?scl:scl enable maven30 %{scl} - <<"EOF"}
+%{?scl:scl enable %{scl} - <<"EOF"}
 set -e -x
 # org.jmock.core package is needed, we don't have it
 %mvn_build -f
 %{?scl:EOF}
 
 %install
-%{?scl:scl enable maven30 %{scl} - <<"EOF"}
+%{?scl:scl enable %{scl} - <<"EOF"}
 set -e -x
 %mvn_install
 %{?scl:EOF}
@@ -65,6 +65,9 @@ set -e -x
 %doc LICENSE NOTICE
 
 %changelog
+* Mon Jan 11 2016 Michal Srb <msrb@redhat.com> - 1.3-9.12
+- maven33 rebuild #2
+
 * Sat Jan 09 2016 Michal Srb <msrb@redhat.com> - 1.3-9.11
 - maven33 rebuild
 
