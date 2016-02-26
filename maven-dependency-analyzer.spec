@@ -4,14 +4,14 @@
 
 Name:           %{?scl_prefix}%{pkg_name}
 Version:        1.3
-Release:        9.12%{?dist}
+Release:        9.13%{?dist}
 Summary:        Maven dependency analyzer
 License:        ASL 2.0
 URL:            http://maven.apache.org/shared/maven-dependency-analyzer/
 Source0:        http://repo1.maven.org/maven2/org/apache/maven/shared/%{pkg_name}/%{version}/%{pkg_name}-%{version}-source-release.zip
 BuildArch:      noarch
 
-BuildRequires:  %{?scl_prefix_java_common}maven-local
+BuildRequires:  %{?scl_prefix}maven-local
 BuildRequires:  %{?scl_prefix}maven-shared
 BuildRequires:  %{?scl_prefix}httpcomponents-project
 BuildRequires:  %{?scl_prefix}maven-doxia-module-xhtml
@@ -65,6 +65,9 @@ set -e -x
 %doc LICENSE NOTICE
 
 %changelog
+* Mon Feb 08 2016 Michal Srb <msrb@redhat.com> - 1.3-9.13
+- Fix BR on maven-local & co.
+
 * Mon Jan 11 2016 Michal Srb <msrb@redhat.com> - 1.3-9.12
 - maven33 rebuild #2
 
